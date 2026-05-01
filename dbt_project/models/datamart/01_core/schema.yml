@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension (type-1) — one row per customer"
+    config:
+      tags:
+        - dimension
+    columns:
+      - name: customer_sk_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_nk
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    description: "Product dimension"
+    config:
+      tags:
+        - dimension
+    columns:
+      - name: product_sk_id
+        tests:
+          - not_null
+          - unique
+      - name: product_nk
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_orders
+    description: "Order fact — grain: one row per order"
+    config:
+      tags:
+        - finance
+      meta:
+        relationships:
+          - to: dim_customers
+            column: customer_sk_id
+            type: many-to-one
+          - to: dim_products
+            column: product_sk_id
+            type: many-to-one
+    columns:
+      - name: order_sk_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_sk_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk_id
+      - name: product_sk_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk_id

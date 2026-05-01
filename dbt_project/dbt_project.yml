@@ -1,0 +1,41 @@
+name: 'shopmetrics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'shopmetrics'
+
+model-paths:    ["models"]
+snapshot-paths: ["snapshots"]
+seed-paths:     ["seeds"]
+macro-paths:    ["macros"]
+test-paths:     ["tests"]
+
+target-path:    "target"
+clean-targets:  ["target", "dbt_packages"]
+
+vars:
+  bigquery_project:           "{{ env_var('DBT_BIGQUERY_PROJECT', 'my_project') }}"
+  bigquery_dataset_raw:       "raw"
+  bigquery_dataset_staging:   "staging"
+  bigquery_dataset_datamart:  "datamart"
+
+models:
+  shopmetrics:
+    raw:
+      +materialized: view
+      +schema: raw
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+    datamart:
+      01_core:
+        +materialized: table
+        +schema: datamart_01_core
+      02_enriched:
+        +materialized: table
+        +schema: datamart_02_enriched
+      03_consumption:
+        +materialized: table
+        +schema: datamart_03_consumption

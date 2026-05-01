@@ -1,0 +1,12 @@
+# dbt
+output/dbt_project/target/
+output/dbt_project/dbt_packages/
+output/dbt_project/logs/
+output/dbt_project/profiles.yml
+
+# Environment
+.env
+*.env
+
+# OS
+.DS_Store

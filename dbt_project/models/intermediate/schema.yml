@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_orders_enriched
+    description: "Intermediate model for orders with revenue calculation"
+    columns:
+      - name: amount_usd
+        description: "Revenue in USD"
+        tests:
+          - not_null

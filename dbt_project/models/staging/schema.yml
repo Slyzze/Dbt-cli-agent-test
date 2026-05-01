@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Staging for orders — type casting and basic filtering"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled']
+
+  - name: stg_customers
+    description: "Staging for customers"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: email
+        tests:
+          - not_null
+      - name: plan
+        tests:
+          - accepted_values:
+              values: ['free', 'starter', 'pro', 'enterprise']
+
+  - name: stg_products
+    description: "Staging for products"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+      - name: category
+        tests:
+          - accepted_values:
+              values: ['electronics', 'clothing', 'food', 'software']

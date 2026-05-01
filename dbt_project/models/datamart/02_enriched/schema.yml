@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: agg_daily_revenue
+    description: "Daily revenue aggregates by channel and country"
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+      - name: total_revenue_usd
+        tests:
+          - not_null

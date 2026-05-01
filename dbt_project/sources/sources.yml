@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ var('bigquery_project', 'my_project') }}"
+    schema: "{{ var('bigquery_dataset_raw', 'raw') }}"
+    tables:
+      - name: orders
+        description: "Tracks every customer order placed on the platform."
+        columns:
+          - name: order_id
+          - name: customer_id
+          - name: product_id
+          - name: status
+          - name: amount_cents
+          - name: discount_cents
+          - name: channel
+          - name: created_at
+          - name: updated_at
+      - name: customers
+        description: "All registered customers."
+        columns:
+          - name: customer_id
+          - name: email
+          - name: country
+          - name: plan
+          - name: created_at
+      - name: products
+        description: "Product catalogue."
+        columns:
+          - name: product_id
+          - name: name
+          - name: category
+          - name: unit_price_cents
+          - name: is_active

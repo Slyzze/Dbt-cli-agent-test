@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: rpt_customer_lifetime_value
+    description: "Customer lifetime value reporting"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: total_spend_usd
+        tests:
+          - not_null
