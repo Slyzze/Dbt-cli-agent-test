@@ -420,6 +420,8 @@ profiles.yml
 
 ## 10. GitHub push (when `github_repo_url` is provided)
 
+> ⚠️ **ORCHESTRATION OVERRIDE:** If you are being orchestrated by another skill (e.g., `bi-data-engineering-lifecycle`), **skip this GitHub push step entirely**. The orchestrator will handle pushing all files (including those from other skills) at the very end.
+
 ```bash
 OUTPUT_DIR="<output_dir>"
 REPO_URL="<github_repo_url>"
