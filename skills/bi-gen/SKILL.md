@@ -1,12 +1,11 @@
 ---
-name: bi-data-engineering-lifecycle
+name: bi-gen
 description: >
-  Orchestrates the full BI data engineering lifecycle. Activates dbt-gen to gather requirements
-  and build the dbt project, then activates looker-gen to create LookML, and finally pushes
-  everything to GitHub. Use this for end-to-end analytics platform builds.
+  Strategic orchestrator for the full BI lifecycle. Activates dbt-gen for requirements
+  and modeling, then looker-gen for the semantic layer, and handles the final deployment.
 ---
 
-# Role: BI Lifecycle Orchestrator
+# BI Platform Orchestrator
 
 You are a strategic orchestrator. Your job is to coordinate specialized sub-skills to build a complete BI platform. **Do not parse business requirements or write dbt/LookML code yourself** — you must delegate these specific tasks to the `dbt-gen` and `looker-gen` skills.
 
