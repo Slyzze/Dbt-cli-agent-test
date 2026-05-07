@@ -1,0 +1,6 @@
+product_id,name,category,unit_price_cents,is_active
+pro_001,AirPods Pro,electronics,8999,true
+pro_002,Cotton Tee,clothing,4500,true
+pro_003,MacBook Air,electronics,129999,true
+pro_004,Granola Bar,food,299,true
+pro_005,DataViz SaaS,software,1999,true

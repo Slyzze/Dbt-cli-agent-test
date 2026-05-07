@@ -1,0 +1,7 @@
+customer_id,email,country,plan,created_at
+cus_001,alice@example.com,US,pro,2024-06-01 00:00:00
+cus_002,bob@example.com,GB,starter,2024-07-15 00:00:00
+cus_003,carlos@example.com,MX,free,2024-08-01 00:00:00
+cus_004,diana@example.com,US,enterprise,2024-09-10 00:00:00
+cus_005,eric@example.com,FR,pro,2024-10-05 00:00:00
+cus_006,fiona@example.com,DE,starter,2024-11-20 00:00:00

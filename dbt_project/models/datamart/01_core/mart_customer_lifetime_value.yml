@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: mart_customer_lifetime_value
+    description: "Lifetime metrics for each customer."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          expression: "total_spend_usd >= 0"
+      - dbt_utils.expression_is_true:
+          expression: "avg_order_value_usd is not null or total_orders = 0"
+    columns:
+      - name: customer_sk_id
+        description: "Surrogate key for customer."
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Natural key for customer."
+        data_tests:
+          - not_null
+          - unique
+      - name: country
+        description: "Country code."
+      - name: plan
+        description: "Subscription plan."
+        data_tests:
+          - accepted_values:
+              values: ['free', 'starter', 'pro', 'enterprise']
+      - name: total_orders
+        description: "Lifetime number of non-cancelled orders."
+      - name: total_spend_usd
+        description: "Lifetime spend in USD."
+      - name: avg_order_value_usd
+        description: "Lifetime average order value."
+      - name: days_since_last_order
+        description: "Number of days since the customer's last order."

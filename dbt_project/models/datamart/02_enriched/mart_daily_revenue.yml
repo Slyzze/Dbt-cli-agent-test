@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: mart_daily_revenue
+    description: "Daily revenue aggregated by channel and country."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          expression: "total_revenue_usd >= 0"
+      - dbt_utils.expression_is_true:
+          expression: "order_count > 0"
+      - dbt_utils.expression_is_true:
+          expression: "avg_order_value_usd is not null or order_count = 0"
+    columns:
+      - name: date_day
+        description: "The date of the orders."
+        data_tests:
+          - not_null
+      - name: channel
+        description: "Acquisition channel."
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['organic', 'paid', 'referral', 'direct']
+      - name: country
+        description: "Country code of the customer."
+        data_tests:
+          - not_null
+      - name: order_count
+        description: "Number of confirmed and delivered orders."
+      - name: total_revenue_usd
+        description: "Total net revenue in USD."
+      - name: avg_order_value_usd
+        description: "Average order value in USD."

@@ -1,18 +1,19 @@
 with source as (
-    select * from {{ source('raw', 'orders') }}
-),
+    select *
+    from {{ source('raw', 'orders') }}
+)
 
-renamed as (
+, renamed as (
     select
-        cast(order_id as string)        as order_id,
-        cast(customer_id as string)     as customer_id,
-        cast(product_id as string)      as product_id,
-        lower(status)                   as status,
-        cast(amount_cents as numeric)   as amount_cents,
-        cast(discount_cents as numeric) as discount_cents,
-        lower(channel)                  as channel,
-        cast(created_at as timestamp)   as created_at,
-        cast(updated_at as timestamp)   as updated_at
+        order_id as order_nk_id
+        , customer_id as customer_nk_id
+        , product_id as product_nk_id
+        , lower(status) as order_status
+        , cast(amount_cents as numeric) as amount_cents
+        , cast(coalesce(discount_cents, 0) as numeric) as discount_cents
+        , lower(channel) as acquisition_channel
+        , cast(created_at as timestamp) as created_at
+        , cast(updated_at as timestamp) as updated_at
     from source
     where order_id is not null
 )
